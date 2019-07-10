@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dụng quản lý sản phẩm sử dụng hàm</title>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Add New Product</h1>
+<input type="text" id="input" placeholder="New Product"/>
+<button onclick="addProduct(document.getElementById('input').value)">Add</button>
+<button onclick="listProduct(arrPhoneProduct)">List</button>
+<p id="display"></p>
+
+<script>
+    let arrPhoneProduct = ['Sony Xperia', 'Samsung Galaxy', 'Nokia 6', 'Xiaomi Redmi Note 4',
+        'Apple iPhone 6S', 'Xiaomi Mi 5S Plus', 'Apple iPhone 8 Plus', 'Fujitsu F-04E', 'Oppo A71'];
+
+    function listProduct(arrProduct) {
+        let data = '<table>';
+        for (let i = 0; i < arrProduct.length; i++) {
+            let stt = i + 1;
+            data += '<tr>';
+            data += '<td>' + stt + '</td>';
+            data += '<td>' + arrProduct[i] + '</td>';
+            data += '<td><button onclick="editProduct(' + i + ')">Edit</button></td>';
+            data += '<td><button onclick="deleteProduct(' + i + ')">Delete</button></td>';
+            data += '</tr>';
+        }
+        data += '</table>';
+        // return data;
+        let display = document.getElementById('display');
+        display.innerHTML = data;
+    }
+
+    // let display = document.getElementById('display');
+    // display.innerHTML = listProduct(arrPhoneProduct);
+
+    function addProduct(product) {
+        console.log(product);
+        arrPhoneProduct.push(product);
+        listProduct(arrPhoneProduct);
+    }
+
+    function editProduct(product) {
+        let nameNew = prompt('Nhập tên mới');
+        arrPhoneProduct[product] = nameNew;
+        console.log(arrPhoneProduct[product]);
+        listProduct(arrPhoneProduct);
+    }
+
+    function deleteProduct(product) {
+        arrPhoneProduct.splice(product, 1);
+        listProduct(arrPhoneProduct);
+    }
+
+
+</script>
+</body>
+</html>
